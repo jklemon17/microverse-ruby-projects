@@ -66,9 +66,13 @@ module Enumerable
      count
    end
 
-   def my_map
+   def my_map(&my_proc) # This does not REQUIRE a proc, but allows it.
      mapped_array = []
-     self.my_each { |element| mapped_array.push(yield(element)) }
+     unless block_given? # block_given? is a built-in keyword to check whether a block was passed to the method.
+       self.my_each { |element| mapped_array.push(my_proc.call) }
+     else
+       self.my_each { |element| mapped_array.push(yield(element)) }
+     end
      mapped_array
    end
 
@@ -78,11 +82,6 @@ module Enumerable
      #injected = self.my_each(yield)
      output #injected
    end
-
-
-=begin
-   Create #my_inject
-=end
 
  end
 
@@ -130,6 +129,14 @@ array = ["Hey", "Hello", "Hurray", "SSR", 42]
 
 # print array.my_map { |e| e.to_s + "!" }
 # print "\n"
+
+my_proc1 = Proc.new {|e| e.to_s + "!!!"}
+# print array.my_map(&my_proc1)
+# print "\n"
+
+print array.my_map(&my_proc1) {|e| e.to_s + "!"}
+print "\n"
+
 # print array.map { |e| e.to_s + "!" }
 # print "\n"
 
@@ -152,10 +159,10 @@ array = ["Hey", "Hello", "Hurray", "SSR", 42]
 #   final + e.to_s
 # end
 
-
-def multiply_els(array)
-  array.my_inject(1) {|multiplied, element| multiplied * element }
-end
-
-print multiply_els([2,4,5])
-print "\n"
+#
+# def multiply_els(array)
+#   array.my_inject(1) {|multiplied, element| multiplied * element }
+# end
+#
+# print multiply_els([2,4,5])
+# print "\n"
