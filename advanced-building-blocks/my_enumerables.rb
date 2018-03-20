@@ -65,9 +65,22 @@ module Enumerable
      self.my_each { |element| count +=1 if yield(element) }
      count
    end
+
+   def my_map
+     mapped_array = []
+     self.my_each { |element| mapped_array.push(yield(element)) }
+     mapped_array
+   end
+
+   def my_inject(injected)
+     output = injected
+     self.my_each { |element| output = yield(output, element) }
+     #injected = self.my_each(yield)
+     output #injected
+   end
+
+
 =begin
-   Create #my_count
-   Create #my_map
    Create #my_inject
 =end
 
@@ -114,3 +127,35 @@ array = ["Hey", "Hello", "Hurray", "SSR", 42]
 # print array.my_count {|e| e.to_s.length > 1}
 # print array.count {|e| e.to_s.length > 1}
 # print "\n"
+
+# print array.my_map { |e| e.to_s + "!" }
+# print "\n"
+# print array.map { |e| e.to_s + "!" }
+# print "\n"
+
+
+# num_array = [1,2,3,4,5]
+#
+# my_var = num_array.my_inject(0) do |sum, e|
+#   sum + e
+# end
+# my_var2 = num_array.inject do |sum, e|
+#   sum + e
+# end
+#
+# print my_var
+# print "\n"
+# print my_var2
+# print "\n"
+#
+# print array.my_inject("") do |final, e|
+#   final + e.to_s
+# end
+
+
+def multiply_els(array)
+  array.my_inject(1) {|multiplied, element| multiplied * element }
+end
+
+print multiply_els([2,4,5])
+print "\n"
