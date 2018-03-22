@@ -1,32 +1,30 @@
-array = [7,6,12,4,3,45,1]
+array = [7, 6, 12, 4, 3, 45, 1]
 
-# indexL = 0
-# indexR = 1
-# we want indexL and R to not be fined outside the function,
+# index = 0
+# we want index to not be defined outside the function,
 # but to start them off with initial values of 0 and we ,
 # we give them default values
 
-def bubble_sort(array, indexL=0, indexR=1, swapped=false)
+def bubble_sort(array, index=0, swapped=false)
 
 # swapped = false  # given default in first line, same as for the indexes
 
   # check if left > right (which is wrong)?
-  if array[indexL] > array[indexR]
+  if array[index] > array[index + 1]
     # wrong so swap them
-    array[indexL], array[indexR] = array[indexR], array[indexL]
+    array[index], array[index + 1] = array[index + 1], array[index]
     swapped = true
   end
 
-  indexL += 1
-  indexR += 1
+  index += 1
   # run function again
 
   # keep going be calling this recursively again until the right most value,
   # for one complete pass
-  if indexR < array.length
-      bubble_sort(array, indexL, indexR, swapped)
+  if index + 1 < array.length
+      bubble_sort(array, index, swapped)
 
-  else    #indexR == array.length
+  else    #index + 1 == array.length
   # check if already sorted,
   # it is not if swapped == true
   # if swapped == false, then done, return the array
@@ -34,8 +32,7 @@ def bubble_sort(array, indexL=0, indexR=1, swapped=false)
       return array
     else
       # # reset the indexes:
-      # indexL = 0
-      # indexR = 1
+      # index = 0
       # NO NEED TO RESET because if you don't pass anything,
       # they will be set to their default values
       # that we defined in the first line of the function
@@ -50,35 +47,32 @@ end
 
 p bubble_sort(array)
 
-def bubble_sort_by(array, indexL=0, indexR=1, swapped=false, &block)
+def bubble_sort_by(array, index=0, swapped=false, &block)
 
   # swapped = false  # given default in first line, same as for the indexes
 
     # check if left > right (which is wrong)?
-    if block.call(array[indexL], array[indexR]) > 0
+    if block.call(array[index], array[index + 1]) > 0
       # wrong so swap them
-      array[indexL], array[indexR] = array[indexR], array[indexL]
+      array[index], array[index + 1] = array[index + 1], array[index]
       swapped = true
     end
 
-    indexL += 1
-    indexR += 1
+    index += 1
     # run function again
     # keep going be calling this recursively again until the right most value,
     # for one complete pass
-    if indexR < array.length
-        bubble_sort_by(array, indexL, indexR, swapped, &block)
+    if index + 1 < array.length
+      bubble_sort_by(array, index, swapped, &block)
 
-    else    #indexR == array.length
+    elsif swapped == false    # && index + 1 == array.length
     # check if already sorted,
     # it is not if swapped == true
     # if swapped == false, then done, return the array
-      if swapped == false
-        return array
-      else
+      return array
+    else
         # # reset the indexes:
-        # indexL = 0
-        # indexR = 1
+        # index = 0
         # NO NEED TO RESET because if you don't pass anything,
         # they will be set to their default values
         # that we defined in the first line of the function
@@ -86,7 +80,6 @@ def bubble_sort_by(array, indexL=0, indexR=1, swapped=false, &block)
 
         # restart
         bubble_sort_by(array, &block)
-      end
     end
 
 end

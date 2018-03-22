@@ -83,7 +83,7 @@ module Enumerable
      output #injected
    end
 
- end
+end
 
 array = ["Hey", "Hello", "Hurray", "SSR", 42]
 
@@ -134,8 +134,6 @@ my_proc1 = Proc.new {|e| e.to_s + "!!!"}
 # print array.my_map(&my_proc1)
 # print "\n"
 
-print array.my_map(&my_proc1) {|e| e.to_s + "!"}
-print "\n"
 
 # print array.map { |e| e.to_s + "!" }
 # print "\n"
