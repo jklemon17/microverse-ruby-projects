@@ -39,25 +39,68 @@ describe Enumerable do
      end
   end
 
-  describe "#my_select" do
-     context "" do
-       it "" do
-         expect()
+  describe "#my_all?" do
+     context "given strings of various lengths" do
+
+       context "check if all string lengths < 3" do
+         it "returns false" do
+           expect(@my_array.my_all? { |element| element.to_s.length < 3 }).to eql(false)
+         end
+       end
+       context "check if all string lengths > 1" do
+         it "returns true" do
+           expect(@my_array.my_all? { |element| element.to_s.length > 1 }).to eql(true)
+         end
+       end
+
+     end
+   end
+
+  describe "#my_any?" do
+     context "given strings of various lengths" do
+
+       context "check if any string lengths > 7" do
+         it "returns false" do
+           expect(@my_array.my_any? { |element| element.to_s.length > 7 }).to eql(false)
+         end
+       end
+       context "check if any string lengths > 1" do
+         it "returns true" do
+           expect(@my_array.my_any? { |element| element.to_s.length > 1 }).to eql(true)
+         end
+       end
+
+     end
+   end
+
+  describe "#my_none2?" do
+     context "given strings of various lengths" do
+
+       context "check if none of the strings lengths > 1" do
+         it "returns false" do
+           expect(@my_array.my_none2? { |element| element.to_s.length > 1 }).to eql(false)
+         end
+       end
+       context "check if none of the strings lengths > 7" do
+         it "returns true" do
+           expect(@my_array.my_none2? { |element| element.to_s.length > 7 }).to eql(true)
+         end
+       end
+
+     end
+   end
+
+  describe "#my_map" do
+
+     context "given an array" do
+       it "adds '!!!' to each value" do
+         expect(@my_array.my_map { |element| element.to_s + "!!!" }).to eql(["Hey!!!", "Hello!!!", "Hurray!!!", "SSR!!!", "42!!!"])
+       end
+
+       it "returns the first letter of each value" do
+         expect(@my_array.my_map { |element| element.to_s[0] }).to eql(["H", "H", "H", "S", "4"])
        end
      end
-  #   context "" do
-  #     it "" do
-  #       expect()
-  #     end
-  #   end
-  #   context "" do
-  #     it "" do
-  #       expect()
-  #     end
-  #   end
-  end
-  #
-  #
-  #
-  #
+   end
+
 end
