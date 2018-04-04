@@ -22,6 +22,29 @@ describe Enumerable do
   end
 
   describe "#my_select" do
+     context "given 'element.length < 4'" do
+       it "returns the items with length less than 4" do
+         expect(@my_array.my_select { |element| element.to_s.length < 4 }).to eql(["Hey", "SSR", 42])
+       end
+     end
+     context "given select only integers" do
+       it "returns only the integers" do
+         expect(@my_array.my_select { |element| element.is_a?(Integer) }).to eql([42])
+       end
+     end
+     context "given select only values > 50" do
+       it "returns an empty array" do
+         expect(@my_array.my_select { |element| element.to_i > 50 }).to eql([])
+       end
+     end
+  end
+
+  describe "#my_select" do
+     context "" do
+       it "" do
+         expect()
+       end
+     end
   #   context "" do
   #     it "" do
   #       expect()
@@ -32,30 +55,7 @@ describe Enumerable do
   #       expect()
   #     end
   #   end
-  #   context "" do
-  #     it "" do
-  #       expect()
-  #     end
-  #   end
-  # end
-  #
-  # describe "#my_select" do
-  #   context "" do
-  #     it "" do
-  #       expect()
-  #     end
-  #   end
-  #   context "" do
-  #     it "" do
-  #       expect()
-  #     end
-  #   end
-  #   context "" do
-  #     it "" do
-  #       expect()
-  #     end
-  #   end
-  # end
+  end
   #
   #
   #
